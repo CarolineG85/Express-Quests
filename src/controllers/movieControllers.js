@@ -78,7 +78,7 @@ const getUsers = (req, res) => {
 })
 }
 
-const getUsersById = (req, res) => {
+const getUserById = (req, res) => {
   const id = parseInt(req.params.id);
 
   database
@@ -101,5 +101,5 @@ module.exports = {
   getMovies,
   getMovieById,
   getUsers,
-  getUsersById,
+  getUserById,
 };

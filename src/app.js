@@ -11,7 +11,7 @@ app.get("/api/movies", movieControllers.getMovies);
 app.get("/api/movies/:id", movieControllers.getMovieById);
 
 app.get("/api/users", movieControllers.getUsers);
-app.get("/api/users/:id", movieControllers.getUsersById);
+app.get("/api/users/:id", movieControllers.getUserById);
 
 
 
