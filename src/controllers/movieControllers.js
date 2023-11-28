@@ -26,7 +26,7 @@ const movies = [
 ];
 
 
-const database = require("../../database")
+const database = require("../../database");
 
 const getMovies = (req, res) => {
   database
