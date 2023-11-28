@@ -113,7 +113,7 @@ describe("POST /api/movies", () => {
   });
 
   it("should return an error", async () => {
-    const movieWithMissingProps = { duration: 120 };
+    const movieWithMissingProps = { duration: "120" };
 
     const response = await request(app)
       .post("/api/movies")
