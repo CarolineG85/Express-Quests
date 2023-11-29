@@ -3,6 +3,7 @@ const request = require("supertest");
 const app = require("../src/app");
 
 const database = require("../database");
+const { deleteMovie } = require("../src/controllers/movieControllers");
 
 afterAll(() => database.end());
 
@@ -243,3 +244,49 @@ describe("PUT /api/movies/:id", () => {
     expect(response.status).toEqual(404);
    });
 });
+
+
+describe("DELETE /api/movies/:id", () => {
+  it("should edit movie", async () => {
+    const newMovie = {
+      title: "Avatar",
+      director: "James Cameron",
+      year: "2010",
+      color: "1",
+      duration: 162,
+    };
+
+    const [result1] = await database.query(
+      "INSERT INTO movies(title, director, year, color, duration) VALUES (?, ?, ?, ?, ?)",
+      [newMovie.title, newMovie.director, newMovie.year, newMovie.color, newMovie.duration]
+    );
+
+    const id = result1.insertId;
+
+    const deletedMovie = {
+      title: "Wild is life",
+      director: "Alan Smithee",
+      year: "2023",
+      color: "0",
+      duration: 120,
+    };
+
+    const response = await request(app)
+      .delete(`/api/movies/${id}`)
+      .send(deletedMovie);
+
+    expect(response.status).toEqual(204);
+
+    const movieWithIdDeleted = deletedMovie;
+    if(movieWithIdDeleted){
+      const response = await request(app)
+      .get(`/api/movies/${id}`)
+      .send(movieWithIdDeleted);
+  
+    expect(response.status).toEqual(404);
+    }
+});
+
+
+      
+})
