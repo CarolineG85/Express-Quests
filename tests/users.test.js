@@ -242,3 +242,41 @@ const [result] = await database.query("SELECT * FROM users WHERE id=?", id);
   });
   
 });
+
+describe("DELETE /api/users/:id", () => {
+  it("should edit user", async () => {
+    const newUser = {
+      firstname: "Harry",
+      lastname: "Potter",
+      email: `${crypto.randomUUID()}@wild.co`,
+      city: "Hogwarts",
+      language: "English",
+    };
+
+const [resultUser] = await database.query("INSERT INTO users(firstname, lastname, email, city, language) VALUES (?, ?, ?, ?, ?)",
+[newUser.firstname, newUser.lastname, newUser.email, newUser.city, newUser.language])
+
+const id = resultUser.insertId;
+
+const deletedUser = {
+  firstname: "Maria",
+  lastname: "Porter",
+  email: `${crypto.randomUUID()}@wild.co`,
+  city: "Los Angeles",
+  language: "Spanish",
+}
+const response = await request(app)
+.delete(`/api/users/${id}`)
+.send(deletedUser);
+
+expect(response.status).toEqual(204);
+const userWithIdDeleted = deletedUser;
+    if(userWithIdDeleted){
+      const response = await request(app)
+      .get(`/api/users/${id}`)
+      .send(userWithIdDeleted);
+  
+    expect(response.status).toEqual(404);
+    }
+  });
+});
