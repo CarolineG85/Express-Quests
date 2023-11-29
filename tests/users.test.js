@@ -81,7 +81,7 @@ describe("POST /api/users", () => {
       .post("/api/users")
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return an error", async () => {
@@ -91,7 +91,7 @@ describe("POST /api/users", () => {
       .post("/api/users")
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return an error", async () => {
@@ -101,7 +101,7 @@ describe("POST /api/users", () => {
       .post("/api/users")
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return an error", async () => {
@@ -111,7 +111,7 @@ describe("POST /api/users", () => {
       .post("/api/users")
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return an error", async () => {
@@ -121,7 +121,7 @@ describe("POST /api/users", () => {
       .post("/api/users")
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
 });
@@ -184,7 +184,7 @@ const [result] = await database.query("SELECT * FROM users WHERE id=?", id);
       .put(`/api/users/1`)
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return an error", async () => {
@@ -194,7 +194,7 @@ const [result] = await database.query("SELECT * FROM users WHERE id=?", id);
       .put(`/api/users/1`)
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return an error", async () => {
@@ -204,7 +204,7 @@ const [result] = await database.query("SELECT * FROM users WHERE id=?", id);
       .put(`/api/users/1`)
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return an error", async () => {
@@ -214,7 +214,7 @@ const [result] = await database.query("SELECT * FROM users WHERE id=?", id);
       .put(`/api/users/1`)
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return an error", async () => {
@@ -224,16 +224,16 @@ const [result] = await database.query("SELECT * FROM users WHERE id=?", id);
       .put(`/api/users/1`)
       .send(userWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it("should return no user", async () => {
     const newUser = {
-      firstname: "Bob",
-      lastname: "Dupont",
-      email: `${crypto.randomUUID()}@wild.co`,
-      city: "Chicago",
-      language: "Greek",
+      firstname: "Maria",
+  lastname: "Porter",
+  email: `${crypto.randomUUID()}@wild.co`,
+  city: "Los Angeles",
+  language: "Spanish",
     };
 
     const response = await request(app).put("/api/users/0").send(newUser);
